@@ -17,7 +17,6 @@ public class JobService {
     @Autowired
     private DbServiceProperties properties;
 
-
     @Scheduled(fixedRate = 1000)
     public void run() {
         log.info("job started with value: {}", properties.getJobKey());
