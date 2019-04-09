@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  db-service:
+    image: japca/db-service
+    container_name:  db-service
+    ports:
+       - "8081:8080"
+
+  consul:
+    image: japca/consul
+    container_name: consul
+
+
+
+
+
+
+

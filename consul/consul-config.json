@@ -6,7 +6,6 @@
   "enable_syslog": true,
   "ui": true,
   "server": true,
-  "bootstrap_expect": 1,
   "addresses": {
     "http": "127.0.0.1"
   }
