@@ -20,8 +20,6 @@ public class DbServiceConfiguration implements WebServerFactoryCustomizer<Config
     @Value("/${spring.application.name}")
     private String contextPath;
 
-
-
     @Bean
     public JobService jobService() {
         return new JobService();

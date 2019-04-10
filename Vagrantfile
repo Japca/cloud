@@ -26,12 +26,13 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
   config.vm.provision "shell", inline: $instalDocker
-
+  
 
   config.vm.define "server-1" do |server1|
     server1.vm.hostname = "server-1"
     server1.vm.network "private_network", ip: "10.0.0.1"
-    config.vm.provision "shell", inline: "docker-compose -f /vagrant/docker-compose.yml up", run: "always"
+    config.vm.network "forwarded_port", guest_ip: "localhost", guest: 8500, host_ip: "localhost", host: 8500, protocol: "tcp"
+    server1.vm.provision "shell", inline: "docker-compose -f /vagrant/docker-compose.yml up", run: "always"
    end
 
   config.vm.define "server-2" do |server2|
