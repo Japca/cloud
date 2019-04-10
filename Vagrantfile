@@ -5,33 +5,41 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+
+$instalDocker = <<-SCRIPT
+sudo curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo usermod -aG docker vagrant
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+SCRIPT
+
 Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
+  config.vm.box_check_update = false
+  config.vm.provision "shell", inline: $instalDocker
 
-  $startConsul = <<-SCRIPT
-  cd /vagrant/consul
-  ./start.sh
-  SCRIPT
 
   config.vm.define "server-1" do |server1|
     server1.vm.hostname = "server-1"
     server1.vm.network "private_network", ip: "10.0.0.1"
-    server1.vm.provision "shell",  inline: $startConsul, run: "always"
-
-  end
+    config.vm.provision "shell", inline: "docker-compose -f /vagrant/docker-compose.yml up", run: "always"
+   end
 
   config.vm.define "server-2" do |server2|
     server2.vm.hostname = "server-2"
     server2.vm.network "private_network", ip: "10.0.0.2"
   end
 
-  # Disable automatic box update checking. If you disable this, then
+  # Disable automatic box update checking. If you disable this, thenls
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
