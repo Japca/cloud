@@ -1,0 +1,22 @@
+{
+  "data_dir": "data",
+  "log_level": "INFO",
+  "node_name": "lucky",
+  "bootstrap_expect": 2,
+  "bootstrap": false,
+  "ui": true,
+  "server": true,
+  "client_addr": "127.0.0.1",
+  "bind_addr": "192.168.1.101",
+  "retry_join_wan": [
+    "10.0.1.1"
+  ],
+  "rejoin_after_leave": false,
+  "ports": {
+    "server": 8300,
+    "serf_lan": 8301,
+    "serf_wan": 8302,
+    "http": 8500,
+    "dns": 8600
+  }
+}

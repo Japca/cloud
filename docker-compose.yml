@@ -1,38 +1,44 @@
 version: "3.7"
 
 services:
-
   consul:
     image: bitnami/consul:1.4.4
     container_name: consul
-    ports:
-      - "8300:8300"
-      - "8301:8301"
-      - "8301:8301/udp"
-      - "8500:8500"
-      - "8600:8600"
-      - "8600:8600/udp"
-    environment:
-      - CONSUL_UI=true
-    networks:
-      - consul-network
-  db-service:
-    build:
-      context: db-service
-    container_name: db-service
-    ports:
-      - "8081:8080"
-    environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SERVER_NAME=${SERVER_NAME}
-    networks:
-      - consul-network
-    depends_on:
-      - consul
+    volumes:
+       - /programs/IdeaProjects/my-projects/cloud/consul/consul-config.json:/opt/bitnami/consul/conf/consul.json
+#       - /vagrant/consul/consul1.json:/opt/bitnami/consul/conf/consul.json
+#    environment:
+#      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
+#    networks:
+#      - consul-network
+  consul1:
+    image: bitnami/consul:1.4.4
+    container_name: consul
+    volumes:
+      #   /   - /programs/IdeaProjects/my-projects/cloud/consul/consul.json:/opt/bitnami/consul/conf/consul.json
+      - /vagrant/consul/config1.json:/opt/bitnami/consul/conf/consul.json
 
-networks:
-  consul-network:
-    driver: bridge
+    #    environment:
+    #      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
+#    networks:
+#      - consul-network
+#  db-service:
+#    build:
+#      context: db-service
+#    container_name: db-service
+#    ports:
+#      - "8081:8080"
+#    environment:
+#      - SPRING_CLOUD_CONSUL_HOST=consul
+#      - SERVER_NAME=${SERVER_NAME}
+#    networks:
+#      - consul-network
+#    depends_on:
+#      - consul
+
+#networks:
+#  consul-network:
+#    driver: bridge
 
 
 
