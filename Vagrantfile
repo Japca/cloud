@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
   config.vm.provision "shell", inline: $instalDocker
-  config.vm.network "forwarded_port", guest_ip: "localhost", guest: 8500, host_ip: "10.0.1.1", host: 8500, protocol: "tcp"
+
 
   config.vm.define "server-1" do |server1|
     server1.vm.hostname = "server-1"
@@ -36,8 +36,8 @@ Vagrant.configure("2") do |config|
     server1.vm.network "forwarded_port", guest_ip: "127", guest: 8500, host_ip: "10.0.1.1", host: 8500, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8300, host_ip: "10.0.1.1", host: 8300, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8301, host_ip: "10.0.1.1", host: 8301, protocol: "tcp"
+    server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8301, host_ip: "10.0.1.1", host: 8301, protocol: "udp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8302, host_ip: "10.0.1.1", host: 8302, protocol: "tcp"
-    server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8302, host_ip: "10.0.1.1", host: 8302, protocol: "udp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8302, host_ip: "10.0.1.1", host: 8302, protocol: "udp"
     server1.vm.provision "file", source: "/programs/IdeaProjects/my-projects/cloud/consul/start1.sh", destination: "$HOME/start.sh", run: "always"
     server1.vm.provision "shell", inline: "./start.sh", run: "always"
@@ -50,8 +50,8 @@ Vagrant.configure("2") do |config|
     server2.vm.network "forwarded_port", guest_ip: "127.0.0.1", guest: 8500, host_ip: "10.0.1.2", host: 8500, protocol: "tcp"
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8300, host_ip: "10.0.1.2", host: 8300, protocol: "tcp"
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8301, host_ip: "10.0.1.2", host: 8301, protocol: "tcp"
+    server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8301, protocol: "udp"
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8302, protocol: "tcp"
-    server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8302, protocol: "udp"
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8302, protocol: "udp"
     # server2.vm.network "forwarded_port", guest_ip: "localhost", guest: 8500, host_ip: "10.0.0.2", host: 8500, protocol: "tcp"
     server2.vm.provision "file", source: "/programs/IdeaProjects/my-projects/cloud/consul/start2.sh", destination: "$HOME/start.sh", run: "always"

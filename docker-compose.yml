@@ -4,8 +4,8 @@ services:
   consul:
     image: bitnami/consul:1.4.4
     container_name: consul
-    volumes:
-       - /programs/IdeaProjects/my-projects/cloud/consul/consul-config.json:/opt/bitnami/consul/conf/consul.json
+#    volumes:
+#       - /programs/IdeaProjects/my-projects/cloud/consul/consul-config.json:/opt/bitnami/consul/conf/consul.json
 #       - /vagrant/consul/consul1.json:/opt/bitnami/consul/conf/consul.json
 #    environment:
 #      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
