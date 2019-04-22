@@ -1,28 +1,25 @@
-package net.japca.dbsevice;
+package net.japca.admin;
+
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@EnableScheduling
+@EnableAdminServer
 @EnableDiscoveryClient
 @SpringBootApplication
-public class DbSeviceApplication {
+public class AdminApplication {
 
     public static void main(String[] args) throws UnknownHostException {
         String property = System.getProperty("server.name");
         if (property == null || property.isBlank()) {
             System.setProperty("server.name", InetAddress.getLocalHost().getHostName());
         }
-
-        SpringApplication.run(DbSeviceApplication.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 
 }

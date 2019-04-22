@@ -18,9 +18,10 @@
 
     <modules>
         <module>db-service</module>
+        <module>admin</module>
     </modules>
 
-    
+
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
@@ -38,5 +39,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
