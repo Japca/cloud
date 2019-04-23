@@ -1,7 +1,11 @@
 package net.japca.admin;
 
+import de.codecentric.boot.admin.server.config.AdminServerNotifierAutoConfiguration;
+import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.web.client.HttpHeadersProvider;
 
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -45,16 +49,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new AuthHttpHeadersProvider();
     }
 
-//
-//    @AutoConfigureBefore({AdminServerNotifierAutoConfiguration.NotifierTriggerConfiguration.class, AdminServerNotifierAutoConfiguration.CompositeNotifierConfiguration.class})
-//    public static class SlackNotifierConfiguration {
-//
-//        @Bean
-//        @ConfigurationProperties("spring.boot.admin.notify.slack")
-//        public CustomSlackNotifier customSlackNotifier(InstanceRepository repository) {
-//            return new CustomSlackNotifier(repository);
-//        }
-//    }
+
+    @AutoConfigureBefore({AdminServerNotifierAutoConfiguration.NotifierTriggerConfiguration.class, AdminServerNotifierAutoConfiguration.CompositeNotifierConfiguration.class})
+    public static class SlackNotifierConfiguration {
+
+        @Bean
+        @ConfigurationProperties("spring.boot.admin.notify.slack")
+        public CustomSlackNotifier customSlackNotifier(InstanceRepository repository) {
+            return new CustomSlackNotifier(repository);
+        }
+    }
 }
 
 
