@@ -4,7 +4,6 @@ import de.codecentric.boot.admin.server.web.client.HttpHeadersProvider;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -43,12 +42,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public HttpHeadersProvider adminHeaderProvider() {
-        return instance -> {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Basic YWRtaW46YWRtaW4=");
-            return headers;
-        };
+        return new AuthHttpHeadersProvider();
     }
+
+//
+//    @AutoConfigureBefore({AdminServerNotifierAutoConfiguration.NotifierTriggerConfiguration.class, AdminServerNotifierAutoConfiguration.CompositeNotifierConfiguration.class})
+//    public static class SlackNotifierConfiguration {
+//
+//        @Bean
+//        @ConfigurationProperties("spring.boot.admin.notify.slack")
+//        public CustomSlackNotifier customSlackNotifier(InstanceRepository repository) {
+//            return new CustomSlackNotifier(repository);
+//        }
+//    }
 }
 
 
