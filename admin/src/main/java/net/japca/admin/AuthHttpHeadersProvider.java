@@ -24,7 +24,6 @@ public class AuthHttpHeadersProvider implements HttpHeadersProvider {
     public HttpHeaders getHeaders(Instance instance) {
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, encode(username, password));
-
         return headers;
     }
 
