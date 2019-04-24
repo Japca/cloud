@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class CustomSlackNotifier extends SlackNotifier {
 
-    private static final String DEFAULT_MESSAGE = "*#{instance.registration.name}* - version: #{instance.registration.metadata.version} (#{instance.id}) is *#{event.statusInfo.status}*";
+    private static final String DEFAULT_MESSAGE = "*#{instance.registration.name}* (#{instance.id}) _-_ version: #{instance.buildVersion} is *#{event.statusInfo.status}*";
 
     private static final String DEREGISTER_MESSAGE = "*#{instance.registration.name}* (#{instance.id}) is *OFFLINE*";
 
