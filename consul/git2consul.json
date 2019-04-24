@@ -3,7 +3,7 @@
   "repos" : [{
     "name" : "config/db-service/application.properties",
     "url" : "https://github.com/Japca/cloud.git",
-    "branches" : ["master"],
+    "branches" : [""],
     "hooks": [{
       "type" : "polling",
       "interval" : "1"
