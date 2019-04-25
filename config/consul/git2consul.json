@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "logger" : {
+    "name" : "git2consul",
+    "streams" : [{
+      "level": "trace",
+      "stream": "process.stdout"
+    },
+      {
+        "level": "debug",
+        "type": "rotating-file",
+        "path": "/programs/IdeaProjects/my-projects/config/consul/git2consul.log"
+      }]
+  },
+
+  "repos" : [{
+    "name" : "config",
+    "url" : "https://github.com/Japca/cloud.git",
+    "source_root": "config/dev",
+    "include_branch_name" : false,
+    "ignore_file_extension" : true,
+    "branches" : ["master"],
+    "hooks": [{
+      "type" : "polling",
+      "interval" : "1"
+    }]
+  }]
+}
