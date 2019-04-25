@@ -9,7 +9,7 @@
       {
         "level": "debug",
         "type": "rotating-file",
-        "path": "/programs/IdeaProjects/my-projects/config/consul/git2consul.log"
+        "path": "/programs/IdeaProjects/my-projects/consul/git2consul.log"
       }]
   },
 
