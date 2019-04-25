@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by Jakub krhovják on 4/6/19.
  */
 @Data
-@ConfigurationProperties(prefix = "application")
+@ConfigurationProperties("db-service")
 public class DbServiceProperties {
 
     private String jobKey;

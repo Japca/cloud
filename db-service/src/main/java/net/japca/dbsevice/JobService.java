@@ -4,6 +4,7 @@ import net.japca.dbsevice.properties.DbServiceProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,11 @@ public class JobService {
 
     @Value("${jobKey}")
     private String jobKey;
+
+    @Autowired
+    private ConfigurableEnvironment myEnv;
+
+
     @Autowired
     private DbServiceProperties properties;
 
