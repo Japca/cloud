@@ -1,7 +1,7 @@
 {
   "data_dir": "data",
   "log_level": "INFO",
-  "bootstrap_expect": 1,
+  "bootstrap_expect": 2,
   "bootstrap": false,
   "ui": true,
   "server": true,
@@ -17,5 +17,8 @@
     "serf_wan": 8302,
     "http": 8500,
     "dns": 8600
+  },
+  "dns_config": {
+    "allow_stale": true
   }
 }

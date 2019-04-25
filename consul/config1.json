@@ -19,5 +19,8 @@
     "serf_wan": 8302,
     "http": 8500,
     "dns": 8600
+  },
+  "dns_config": {
+    "allow_stale": true
   }
 }

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by Jakub krhovják on 4/6/19.
  */
 @Configuration
-@EnableConfigurationProperties(DbServiceProperties.class)
+@EnableConfigurationProperties({ DbServiceProperties.class})
 public class DbServiceConfiguration implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>  {
 
     @Value("/${spring.application.name}")
@@ -24,6 +24,12 @@ public class DbServiceConfiguration implements WebServerFactoryCustomizer<Config
     public JobService jobService() {
         return new JobService();
     }
+
+//    @Bean
+////    @Primary
+//    public StaleConsulCatalogWatch staleConsulCatalogWatch() {
+//        return new StaleConsulCatalogWatch(null, null);
+//    }
 
     @Override
     public void customize(ConfigurableServletWebServerFactory factory) {
