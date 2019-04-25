@@ -16,7 +16,7 @@
   "repos" : [{
     "name" : "config",
     "url" : "https://github.com/Japca/cloud.git",
-    "source_root": "config/dev/db-service",
+    "source_root": "config/dev",
     "include_branch_name" : false,
     "ignore_file_extension" : true,
     "branches" : ["master"],
