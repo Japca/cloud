@@ -1,44 +1,63 @@
 version: "3.7"
 
 services:
-  consul:
-    image: bitnami/consul:1.4.4
-    container_name: consul
-#    volumes:
-#       - /programs/IdeaProjects/my-projects/cloud/consul/consul-config.json:/opt/bitnami/consul/conf/consul.json
-#       - /vagrant/consul/consul1.json:/opt/bitnami/consul/conf/consul.json
-#    environment:
-#      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
-#    networks:
-#      - consul-network
-  consul1:
-    image: bitnami/consul:1.4.4
-    container_name: consul
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
-      #   /   - /programs/IdeaProjects/my-projects/cloud/consul/consul.json:/opt/bitnami/consul/conf/consul.json
-      - /vagrant/consul/config1.json:/opt/bitnami/consul/conf/consul.json
+      - /programs/IdeaProjects/my-projects/cloud/elastic-service/elastic-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - cloud-network
+#
+#  consul:
+#    image: bitnami/consul:1.4.4
+#    container_name: consul
+##    volumes:
+##       - /programs/IdeaProjects/my-projects/cloud/consul/consul-config.json:/opt/bitnami/consul/conf/consul.json
+##       - /vagrant/consul/consul1.json:/opt/bitnami/consul/conf/consul.json
+##    environment:
+##      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
+##    networks:
+##      - consul-network
+#  consul1:
+#    image: bitnami/consul:1.4.4
+#    container_name: consul
+#    volumes:
+#      #   /   - /programs/IdeaProjects/my-projects/cloud/consul/consul.json:/opt/bitnami/consul/conf/consul.json
+#      - /vagrant/consul/config1.json:/opt/bitnami/consul/conf/consul.json
+#
+#    #    environment:
+#    #      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
+##    networks:
+##      - consul-network
+##  db-service:
+##    build:
+##      context: db-service
+##    container_name: db-service
+##    ports:
+##      - "8081:8080"
+##    environment:
+##      - SPRING_CLOUD_CONSUL_HOST=consul
+##      - SERVER_NAME=${SERVER_NAME}
+##    networks:
+##      - consul-network
+##    depends_on:
+##      - consul
 
-    #    environment:
-    #      - CONSUL_LOCAL_CONFIG=/opt/bitnami/consul/consul.json
-#    networks:
-#      - consul-network
-#  db-service:
-#    build:
-#      context: db-service
-#    container_name: db-service
-#    ports:
-#      - "8081:8080"
-#    environment:
-#      - SPRING_CLOUD_CONSUL_HOST=consul
-#      - SERVER_NAME=${SERVER_NAME}
-#    networks:
-#      - consul-network
-#    depends_on:
-#      - consul
-
-#networks:
-#  consul-network:
-#    driver: bridge
+networks:
+  cloud-network:
+    driver: bridge
 
 
 

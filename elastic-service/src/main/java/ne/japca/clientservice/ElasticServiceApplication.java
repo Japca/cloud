@@ -15,17 +15,24 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import lombok.extern.slf4j.Slf4j;
+import ne.japca.clientservice.model.Item;
 import ne.japca.clientservice.properties.ElasticProperties;
+import ne.japca.clientservice.repository.ItemRepository;
 
 @Slf4j
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableScheduling
-
 @EnableConfigurationProperties(ElasticProperties.class)
 public class ElasticServiceApplication {
+
+    @Autowired
+    private ItemRepository repository;
 
     @Autowired
     private ElasticProperties properties;
@@ -59,10 +66,18 @@ public class ElasticServiceApplication {
         SpringApplication.run(ElasticServiceApplication.class, args);
     }
 
+    @PostConstruct
+    public void init() {
+        repository.save(new Item().setName("Elastic item 1"));
+    }
+
 
     @Scheduled(fixedRate = 1000)
     public void log() {
         log.info("Test key: {}", properties.getTestKey());
+        List<Item> byName = repository.findByName("Elastic item 1");
+
+        log.info("Elastic item: {}", byName.get(0));
 
     }
 }
