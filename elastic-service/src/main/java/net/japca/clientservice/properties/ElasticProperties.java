@@ -1,4 +1,4 @@
-package ne.japca.clientservice.properties;
+package net.japca.clientservice.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

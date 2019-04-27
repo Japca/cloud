@@ -1,4 +1,4 @@
-package ne.japca.clientservice;
+package net.japca.clientservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

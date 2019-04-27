@@ -1,4 +1,4 @@
-package ne.japca.clientservice.config;
+package net.japca.clientservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;

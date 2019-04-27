@@ -1,4 +1,4 @@
-package ne.japca.clientservice.model;
+package net.japca.clientservice.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
