@@ -13,7 +13,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - /programs/IdeaProjects/my-projects/cloud/elastic-service/elastic-data:/usr/share/elasticsearch/data
+      - elastic-volume:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
       - 9300:9300
@@ -58,6 +58,9 @@ services:
 networks:
   cloud-network:
     driver: bridge
+
+volumes:
+  elastic-volume:
 
 
 

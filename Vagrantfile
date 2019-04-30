@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 
-$instalDocker = <<-SCRIPT
+$installDocker = <<-SCRIPT
 sudo apt-get install unzip
 sudo curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
@@ -27,19 +27,19 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
-  config.vm.provision "shell", inline: $instalDocker
+  config.vm.provision "shell", inline: $installDocker
 
 
   config.vm.define "server-1" do |server1|
     server1.vm.hostname = "server-1"
-    server1.vm.network "private_network", ip: "10.0.1.1" 
+    server1.vm.network "private_network", ip: "10.0.1.1"
     server1.vm.network "forwarded_port", guest_ip: "127", guest: 8500, host_ip: "10.0.1.1", host: 8500, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8300, host_ip: "10.0.1.1", host: 8300, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8301, host_ip: "10.0.1.1", host: 8301, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8301, host_ip: "10.0.1.1", host: 8301, protocol: "udp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8302, host_ip: "10.0.1.1", host: 8302, protocol: "tcp"
     server1.vm.network "forwarded_port", guest_ip: "10.0.1.1", guest: 8302, host_ip: "10.0.1.1", host: 8302, protocol: "udp"
-    server1.vm.provision "file", source: "/programs/IdeaProjects/my-projects/cloud/consul/start1.sh", destination: "$HOME/start.sh", run: "always"
+    server1.vm.provision "file", source: "consul/start1.sh", destination: "$HOME/start.sh", run: "always"
     server1.vm.provision "shell", inline: "./start.sh", run: "always"
     # server1.vm.provision "shell", inline: "docker-compose -f /vagrant/docker-compose.yml up consul1", run: "always"
    end
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8302, protocol: "tcp"
     server2.vm.network "forwarded_port", guest_ip: "10.0.1.2", guest: 8302, host_ip: "10.0.1.2", host: 8302, protocol: "udp"
     # server2.vm.network "forwarded_port", guest_ip: "localhost", guest: 8500, host_ip: "10.0.0.2", host: 8500, protocol: "tcp"
-    server2.vm.provision "file", source: "/programs/IdeaProjects/my-projects/cloud/consul/start2.sh", destination: "$HOME/start.sh", run: "always"
+    server2.vm.provision "file", source: "consul/start2.sh", destination: "$HOME/start.sh", run: "always"
     # server2.vm.provision "shell", inline: "SERVER_NAME=$(hostname) docker-compose -f /vagrant/docker-compose.yml up consul", run: "always"
   end
 
