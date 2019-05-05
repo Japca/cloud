@@ -19,6 +19,44 @@ services:
       - 9300:9300
     networks:
       - cloud-network
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.2.2
+    ports:
+      - '25826:25826'
+    volumes:
+      - /home/japca/projects/my-projects/cloud/docker/elastic/logstash.config:/elk-config/logstash.config
+      - /home/japca/elastic-service.log:/elastic-service.log
+    command: logstash -f /elk-config/logstash.config
+    networks:
+      - cloud-network
+    depends_on:
+      - elasticsearch
+
+#    kibana:
+#      image: docker.elastic.co/kibana/kibana:6.3.2
+#      ports:
+#        - '5601:5601'
+#      networks:
+#        - cloud-network
+#      depends_on:
+#        - elasticsearch
+
+
+#  rabbit:
+#    build:
+#      context: .
+#      dockerfile: docker/rabbit/Dockerfile
+#    environment:
+#      - RABBITMQ_DEFAULT_USER=guest
+#      - RABBITMQ_DEFAULT_PASS=guest
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    networks:
+#      cloud-network:
+#    restart: "always"
+
 #
 #  consul:
 #    image: bitnami/consul:1.4.4
@@ -61,6 +99,9 @@ networks:
 
 volumes:
   elastic-volume:
+  rabbit-volume:
+
+
 
 
 

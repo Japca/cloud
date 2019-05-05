@@ -8,7 +8,6 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  */
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "ne.japca.clientservice.repository")
+@EnableElasticsearchRepositories(basePackages = "net.japca.clientservice.repository")
 public class ElasticServiceConfiguration {
-
 }
