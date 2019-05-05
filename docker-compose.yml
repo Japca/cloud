@@ -22,10 +22,11 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:6.2.2
+    container_name: logstash
     ports:
       - '25826:25826'
     volumes:
-      - /home/japca/projects/my-projects/cloud/docker/elastic/logstash.config:/elk-config/logstash.config
+      - ./docker/elastic/logstash.config:/elk-config/logstash.config
       - /home/japca/elastic-service.log:/elastic-service.log
     command: logstash -f /elk-config/logstash.config
     networks:
@@ -33,14 +34,15 @@ services:
     depends_on:
       - elasticsearch
 
-#    kibana:
-#      image: docker.elastic.co/kibana/kibana:6.3.2
-#      ports:
-#        - '5601:5601'
-#      networks:
-#        - cloud-network
-#      depends_on:
-#        - elasticsearch
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:6.2.2
+    ports:
+      - '5601:5601'
+    networks:
+      - cloud-network
+    depends_on:
+      - elasticsearch
 
 
 #  rabbit:
